@@ -1,7 +1,7 @@
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import Footer from './components/Footer';
-import fcf from './assets/Mascota.jpg';
+import fcf from './assets/images-5.jpg';
 import './App.css';
 
 function App() {
