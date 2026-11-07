@@ -1,9 +1,7 @@
-const HeroSection = () => {
-  const mensaje = "Esta es la sección principal";
+export default function HeroSection() {
   return (
-    <section>
-      <h2>{mensaje}</h2>
-    </section>
+    <div className="hero-container">
+      <p style={{ margin: 0, color: '#444', fontWeight: '500' }}>Esta es la sección principal</p>
+    </div>
   );
-};
-export default HeroSection;
+}

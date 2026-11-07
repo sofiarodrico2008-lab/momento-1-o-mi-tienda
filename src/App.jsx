@@ -1,18 +1,47 @@
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { ProveedorFavoritos } from './context/contexto_favoritos';
+import { AuthProvider } from './context/AuthContext';
+import { RutaProtegida } from './components/RutaProtejida';
+
 import Header from './components/Header';
-import HeroSection from './components/HeroSection';
 import Footer from './components/Footer';
-import fcf from './assets/images-5.jpg';
+import Login from './pages/Login';
+import Inicio from './pages/inicio';
+import Catalogo from './pages/catalogo';
+import Favoritos from './pages/favoritos';
 import './App.css';
 
-function App() {
+function Layout() {
   return (
-    <div>
-      <img src={fcf} alt="Mascota" style={{ width: '200px' }} />
+    <div className="app-container">
       <Header />
-      <HeroSection />
+      <main style={{ flex: 1 }}>
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <AuthProvider>
+      <ProveedorFavoritos>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route element={<RutaProtegida />}>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Inicio />} />
+                <Route path="catalogo" element={<Catalogo />} />
+                <Route path="favoritos" element={<Favoritos />} />
+              </Route>
+            </Route>
+
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          </Routes>
+        </BrowserRouter>
+      </ProveedorFavoritos>
+    </AuthProvider>
+  );
+}
